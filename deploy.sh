@@ -8,7 +8,7 @@ set -e
 npm run docs:build
 
 # 进入生成的文件夹
-cd docs/.vuepress/dist
+cd src/.vuepress/dist
 
 # deploy to github
 echo 'blog.overthestep.com' > CNAME
@@ -38,4 +38,4 @@ git push -f $githubUrl master:gh-pages # 推送到github
 # git push -f $codingUrl master # 推送到coding
 
 cd - # 退回开始所在目录
-rm -rf docs/.vuepress/dist
+rm -rf src/.vuepress/dist
