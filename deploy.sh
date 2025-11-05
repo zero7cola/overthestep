@@ -15,6 +15,8 @@ echo 'blog.overthestep.com' > CNAME
 if [ -z "$GITHUB_TOKEN" ]; then
   msg='deploy'
   githubUrl=git@github.com:zero7cola/overthestep.git
+  git config --global user.name "overthestep"
+  git config --global user.email "outsstill@gmail.com"
 else
   msg='来自github actions的自动部署'
   githubUrl=https://zero7cola:${GITHUB_TOKEN}@github.com/zero7cola/overthestep.git
