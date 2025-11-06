@@ -17,6 +17,9 @@ export default hopeTheme({
 
   docsDir: "src",
 
+  lastUpdated: true,     // 关闭最后更新时间
+  contributors: false,    // 关闭贡献者信息
+
   // 导航栏
   //navbar,
   navbar: [
