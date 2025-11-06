@@ -220,7 +220,7 @@ export default hopeTheme({
     },
     comment: {
       // 选择一个评论服务
-      provider: "Giscus",
+      provider: "Giscus", // Artalk | Giscus | Waline | Twikoo
 
     },
 
