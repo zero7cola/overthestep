@@ -38,6 +38,9 @@ jobs:
       - name: 构建 VuePress 站点
         run: npm run docs:build
 
+      - name: 添加 CNAME 文件
+        run: echo "overthestep.com" > src/.vuepress/dist/CNAME
+
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
       - name: 部署到 GitHub Pages
