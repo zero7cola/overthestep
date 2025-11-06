@@ -2,7 +2,7 @@
 home: true
 layout: Blog
 icon: house
-title: 博客主页
+title: 主页
 #heroImage: /touming.jpg
 heroText: over the step
 heroFullScreen: true
