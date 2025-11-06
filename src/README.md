@@ -2,7 +2,8 @@
 home: true
 layout: Blog
 icon: house
-title: 主页
+title: OverTheStep
+description: overthestep,跨过阶梯
 #heroImage: /touming.jpg
 heroText: over the step
 heroFullScreen: true
