@@ -2,6 +2,7 @@ import { defineUserConfig } from "vuepress";
 
 import theme from "./theme.js";
 import { gitPlugin } from "@vuepress/plugin-git";
+import { commentPlugin } from '@vuepress/plugin-comment'
 
 export default defineUserConfig({
   base: "/",
@@ -19,6 +20,15 @@ export default defineUserConfig({
       createdTime: false,
       updatedTime: true,      // 是否启用 “最后更新时间”
       contributors: false,     // 是否启用 “贡献者” 信息
+    }),
+     commentPlugin({
+      provider: 'Giscus',
+      repo:'zero7cola/overthestep',
+      repoId: 'R_kgDOQPrYjA',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOQPrYjM4Cxfcs'
+      // 其他选项
+      // ...
     }),
   ],
 });

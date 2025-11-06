@@ -218,6 +218,11 @@ export default hopeTheme({
     components: {
       components: ["Badge", "VPCard"],
     },
+    comment: {
+      // 选择一个评论服务
+      provider: "Giscus",
+
+    },
 
     icon: {
       prefix: "fa6-solid:",

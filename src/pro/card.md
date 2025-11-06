@@ -1,12 +1,16 @@
 ---
 title: 【2025年】香港手机卡完全攻略
 icon: fa6-brands:markdown
+# 侧边栏顺序
 order: 1
 category:
   - 香港卡
 tag:
   - 香港卡
+  - haha卡
+# 此页面会在文章列表置顶  
 star: true
+# 此页面会出现在星标文章中
 sticky: true
 ---
 
