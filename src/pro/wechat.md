@@ -20,7 +20,7 @@ sticky: true
 
 TG：[https://telegram.me/overthestep](https://telegram.me/overthestep)​<br>
 QQ：88651795​<br>
-Email:outsstill@gmail.com
+Email:[outsstill@gmail.com]
 :::
 
 ## 微信预加保号
