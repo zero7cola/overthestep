@@ -62,7 +62,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 
-// 默认 6 名玩家（可重置）
+// 默认玩家
 const defaultPlayers = [
   { name: "aahzp", result: 0, cost: 0 },
   { name: "bbjj",  result: 0, cost: 0 },
@@ -79,6 +79,7 @@ const error = ref("");
 
 const addPlayer = () => players.push({ name: "", result: 0, cost: 0 });
 const removePlayer = (i) => players.splice(i, 1);
+
 const resetPlayers = () => {
   players.splice(0, players.length, ...defaultPlayers.map(p => ({ ...p })));
   results.value = [];
@@ -91,10 +92,10 @@ const calc = () => {
   error.value = "";
   results.value = [];
 
-  // 校验：输赢之和必须为 0（考虑小数误差）
+  // 校验输赢和
   const sumResult = players.reduce((s, p) => s + Number(p.result || 0), 0);
   if (!nearlyZero(sumResult)) {
-    error.value = `打牌输赢总和不为 0（当前和：${sumResult.toFixed(2)}），请检查每个人的输赢输入。`;
+    error.value = `打牌输赢总和不为 0（当前和：${sumResult.toFixed(2)}），请检查所有人的输赢输入。`;
     return;
   }
 
@@ -104,71 +105,65 @@ const calc = () => {
   const draws   = players.filter(p => Number(p.result) === 0);
   const totalWin = winners.reduce((s, p) => s + Number(p.result), 0);
 
-  // finalMap 存放中间结果（未格式化）
   const finalMap = {};
   players.forEach(p => finalMap[p.name] = 0);
 
-  // -------------------- 规则 1 --------------------
+  // -------------------- 规则 1（最新修正版） --------------------
   if (mode.value === "1") {
-    // 平局：返还自己的支出（最终 = cost）
-    draws.forEach(p => {
+    // 返还所有人的支出
+    players.forEach(p => {
       finalMap[p.name] = Number(p.cost || 0);
     });
 
-    // 输家：他们的最终 = result + cost （result < 0）
+    // 输家：最终 = 输的钱 + cost
     losers.forEach(p => {
       finalMap[p.name] = Number(p.result || 0) + Number(p.cost || 0);
     });
 
-    // 赢家：按盈利比例承担 totalCost（若没有赢家 totalWin==0，则无分摊）
+    // 平局：最终 = cost （上面已经设置）
+    // 赢家：最终 = result - 分摊 + cost
     winners.forEach(p => {
       const share = totalWin > 0 ? totalCost * (Number(p.result) / totalWin) : 0;
-      finalMap[p.name] = Number(p.result) - share;
+      finalMap[p.name] = Number(p.result) - share + Number(p.cost || 0);
     });
   }
 
   // -------------------- 规则 2：所有人平摊 --------------------
   else if (mode.value === "2") {
-    const avg = players.length > 0 ? totalCost / players.length : 0;
+    const avg = players.length ? totalCost / players.length : 0;
     players.forEach(p => {
-      // 采用“最终 = result - avg + cost”的语义（即考虑已付支出）
       finalMap[p.name] = Number(p.result || 0) - avg + Number(p.cost || 0);
     });
   }
 
   // -------------------- 规则 3：复杂模式 --------------------
   else if (mode.value === "3") {
-    // 胜利者承担最多为 totalWin 部分的支出（如果 totalCost <= totalWin 则全部由赢家承担）
     if (totalCost <= totalWin) {
       winners.forEach(p => {
         const share = totalCost * (Number(p.result) / totalWin);
         finalMap[p.name] = Number(p.result) - share;
       });
     } else {
-      // 支出 > 总盈利
-      const winPart = totalWin; // 赢家承担的上限 = totalWin
-      const remain = totalCost - winPart; // 剩余由输家平摊
+      const winPart = totalWin;
+      const remain = totalCost - winPart;
       const loseAvg = losers.length > 0 ? remain / losers.length : 0;
 
-      // 赢家按比例承担 winPart 部分
       winners.forEach(p => {
         const share = winPart * (Number(p.result) / totalWin);
         finalMap[p.name] = Number(p.result) - share;
       });
 
-      // 输家平摊剩余（并保留他们自身的输赢）
       losers.forEach(p => {
         finalMap[p.name] = Number(p.result) - loseAvg;
       });
     }
 
-    // 平局返还 cost
     draws.forEach(p => {
       finalMap[p.name] = Number(p.cost || 0);
     });
   }
 
-  // 结果数组化（保留两位小数）
+  // 格式化结果
   results.value = players.map(p => ({
     name: p.name,
     final: Number((finalMap[p.name] || 0).toFixed(2)),
