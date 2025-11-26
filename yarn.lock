@@ -849,6 +849,11 @@
     unified "^11.0.5"
     vue "^3.5.22"
 
+"@vuepress/plugin-google-analytics@^2.0.0-rc.118":
+  version "2.0.0-rc.118"
+  resolved "https://registry.npmmirror.com/@vuepress/plugin-google-analytics/-/plugin-google-analytics-2.0.0-rc.118.tgz"
+  integrity sha512-8klVuU4IoJ4TKs2pQqoPTbxtpeKLnD07gReSHEyDCK2bl4wzhVVDs6XN9tXPqGdQIFph2gO4a88oPnaHqhrZ6Q==
+
 "@vuepress/plugin-icon@2.0.0-rc.118":
   version "2.0.0-rc.118"
   resolved "https://registry.npmmirror.com/@vuepress/plugin-icon/-/plugin-icon-2.0.0-rc.118.tgz"

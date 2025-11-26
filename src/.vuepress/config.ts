@@ -1,8 +1,9 @@
 import { defineUserConfig } from "vuepress";
 
-import theme from "./theme.js";
-import { gitPlugin } from "@vuepress/plugin-git";
+import theme from "./theme.js"
+import { gitPlugin } from "@vuepress/plugin-git"
 import { commentPlugin } from '@vuepress/plugin-comment'
+import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 
 export default defineUserConfig({
   base: "/",
@@ -30,5 +31,9 @@ export default defineUserConfig({
       // 其他选项
       // ...
     }),
+      googleAnalyticsPlugin({
+          id: "G-CCHY7N4G27", // 替换成你的 GA 测量ID
+      }),
+
   ],
 });
