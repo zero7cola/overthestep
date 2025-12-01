@@ -47,6 +47,7 @@ export default hopeTheme({
       activeMatch: "^/pro/problem",
       //activeMatch: "^/problem/faq",
     },
+    { text: "工具", link: "/tool.md", icon: "lightbulb" },
     {
       text: "联系",
       link: "/intro.md",
@@ -119,6 +120,10 @@ export default hopeTheme({
       "/demo/encrypt.html": {
         hint: "Password: 1234",
         password: "1234",
+      },
+      "/answer.html": {
+        hint: "使用【介绍页】的联系方式取得密码",
+        password: "9527",
       },
     },
   },

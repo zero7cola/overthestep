@@ -24,6 +24,8 @@ export default sidebar({
       children: "structure",
     },
     "intro",
+    "tool",
+    "pass",
     // {
     //   text: "幻灯片",
     //   icon: "person-chalkboard",
