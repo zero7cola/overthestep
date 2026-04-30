@@ -7,7 +7,7 @@ description: overthestep,跨过阶梯
 #heroImage: /touming.jpg
 heroText: over the step
 heroFullScreen: true
-tagline: 跨过阶梯去感受无边界的世界吧.
+tagline: 跨过阶梯去感受无边界的世界吧
 projects:
   - icon: newspaper
     name: 香港卡
